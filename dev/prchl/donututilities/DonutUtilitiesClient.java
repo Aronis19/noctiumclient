@@ -1,3 +1,4 @@
+// Název souboru: DonutUtilitiesClient.java
 package dev.prchl.donututilities;
 
 import dev.prchl.donututilities.gui.ClickGuiScreen;
@@ -34,6 +35,8 @@ public final class DonutUtilitiesClient implements ClientModInitializer {
         ClientConfig.load(MODULES);
         configReady = true;
         MODULES.registerKeybinds();
+        
+        // Inicializace upraveného rendereru skrze statickou metodu register()
         ChunkOverlayRenderer.register();
 
         ClientTickEvents.END_CLIENT_TICK.register(DonutUtilitiesClient::tick);
@@ -121,4 +124,3 @@ public final class DonutUtilitiesClient implements ClientModInitializer {
         }
     }
 }
-
