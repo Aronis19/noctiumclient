@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "donututilities",
+  "version": "${version}",
+  "name": "DonutSMP Utilities",
+  "description": "Client-side base finding and ESP utility modules for loaded-world scanning.",
+  "authors": [
+    "prchl"
+  ],
+  "license": "GPL-3.0-or-later",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.prchl.donututilities.DonutUtilitiesClient"
+    ]
+  },
+  "mixins": [
+    "donututilities.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

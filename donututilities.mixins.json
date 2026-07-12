@@ -1,0 +1,19 @@
+{
+  "required": false,
+  "package": "dev.prchl.donututilities.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "CameraMixin",
+    "BrandSpooferMixin",
+    "KeyboardInputMixin",
+    "GameRendererMixin",
+    "MouseHandlerMixin",
+    "InGameHudMixin",
+    "MelodifyHudMixin",
+    "ItemEntityRenderStateMixin",
+    "NameTagStorageMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
