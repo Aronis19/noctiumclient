@@ -321,7 +321,6 @@
                     <p class="text-muted max-w-xl mx-auto text-lg">Monthly or lifetime. Pick what works for you.</p>
                     <div class="mt-8 inline-flex items-center rounded-full bg-surface-light p-1">
                         <button class="px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 bg-primary text-black">Krypton+</button>
-                        <button class="px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 text-muted hover:text-white">NewGen</button>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto items-stretch">
@@ -827,5 +826,71 @@
         <script>
             self.__next_f.push([1, "19:I[27201,[\"/noctiumclient/_next/static/chunks/0vei1itll_mf_.js\",\"/noctiumclient/_next/static/chunks/0n4z.7yu76je-.js\",\"/noctiumclient/_next/static/chunks/0-fohvw7kibhr.js\"],\"IconMark\"]\n13:null\n17:[[\"$\",\"title\",\"0\",{\"children\":\"Krypton | DonutSMP Client\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"Krypton - 80+ module client built for DonutSMP. Fabric 1.21.11.\"}],[\"$\",\"meta\",\"2\",{\"property\":\"og:title\",\"content\":\"Krypton | DonutSMP Client\"}],[\"$\",\"meta\",\"3\",{\"property\":\"og:description\",\"content\":\"80+ module client built for DonutSMP. Undetected. Fabric 1.21.11.\"}],[\"$\",\"meta\",\"4\",{\"property\":\"og:url\",\"content\":\"https://kryptonclient.org\"}],[\"$\",\"meta\",\"5\",{\"property\":\"og:site_name\",\"content\":\"Krypton\"}],[\"$\",\"meta\",\"6\",{\"property\":\"og:image\",\"content\":\"https://kryptonclient.org/kr-steel-tile.png\"}],[\"$\",\"meta\",\"7\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"8\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"9\",{\"name\":\"twitter:title\",\"content\":\"Krypton | DonutSMP Client\"}],[\"$\",\"meta\",\"10\",{\"name\":\"twitter:description\",\"content\":\"80+ module client built for DonutSMP. Undetected. Fabric 1.21.11.\"}],[\"$\",\"meta\",\"11\",{\"name\":\"twitter:image\",\"content\":\"https://kryptonclient.org/kr-steel-tile.png\"}],[\"$\",\"link\",\"12\",{\"rel\":\"icon\",\"href\":\"/kr-steel-tile.png\"}],[\"$\",\"$L19\",\"13\",{}]]\n"])
         </script>
-    </body>
+    
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // Hero word animation
+    const words = document.querySelectorAll('h1 span[data-word="true"]');
+    words.forEach((word, i) => {
+        word.style.opacity = "0";
+        word.style.transform = "translateY(30px)";
+        word.style.transition = "opacity 0.7s ease, transform 0.7s cubic-bezier(.16,1,.3,1)";
+        setTimeout(() => {
+            word.style.opacity = "1";
+            word.style.transform = "translateY(0)";
+        }, 150 + i * 120);
+    });
+
+    // FAQ accordion
+    document.querySelectorAll("#faq button[aria-expanded]").forEach(button => {
+        button.addEventListener("click", () => {
+            const item = button.parentElement;
+            const answer = item.querySelector("div.overflow-hidden");
+            const icon = button.querySelector("svg");
+            const open = button.getAttribute("aria-expanded") === "true";
+
+            // Close other questions
+            document.querySelectorAll("#faq button[aria-expanded]").forEach(other => {
+                if (other !== button) {
+                    other.setAttribute("aria-expanded", "false");
+                    const otherItem = other.parentElement;
+                    const otherAnswer = otherItem.querySelector("div.overflow-hidden");
+                    const otherIcon = other.querySelector("svg");
+                    if (otherAnswer) {
+                        otherAnswer.style.height = "0";
+                        otherAnswer.style.opacity = "0";
+                    }
+                    if (otherIcon) otherIcon.classList.remove("rotate-45");
+                }
+            });
+
+            button.setAttribute("aria-expanded", String(!open));
+
+            if (!open) {
+                answer.style.height = answer.scrollHeight + "px";
+                answer.style.opacity = "1";
+                if (icon) icon.classList.add("rotate-45");
+            } else {
+                answer.style.height = "0";
+                answer.style.opacity = "0";
+                if (icon) icon.classList.remove("rotate-45");
+            }
+
+            answer.style.transition = "height 0.3s ease, opacity 0.25s ease";
+        });
+    });
+
+    // Language button
+    const langButton = [...document.querySelectorAll("button")]
+        .find(b => b.textContent.trim().includes("EN"));
+
+    if (langButton) {
+        langButton.addEventListener("click", () => {
+            alert("English is currently selected.");
+        });
+    }
+});
+</script>
+
+</body>
 </html>
