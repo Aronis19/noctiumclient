@@ -63,8 +63,8 @@
                     <a href="/#reviews" class="text-sm transition-colors duration-200 text-muted hover:text-white">Reviews</a>
                 </div>
                 <div class="hidden md:flex items-center gap-1">
-                    <div class="relative">
-                        <button class="flex items-center gap-2 px-3 py-2 text-muted text-sm hover:text-white transition-colors duration-200">
+                    <div class="relative" id="language-switcher">
+                        <button id="language-button" type="button" class="flex items-center gap-2 px-3 py-2 text-muted text-sm hover:text-white transition-colors duration-200" aria-expanded="false">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe" aria-hidden="true">
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
@@ -75,6 +75,10 @@
                                 <path d="m6 9 6 6 6-6"></path>
                             </svg>
                         </button>
+                        <div id="language-menu" class="hidden absolute right-0 mt-2 w-32 rounded-xl border border-white/10 bg-surface p-1 shadow-xl z-50">
+                            <button type="button" class="language-option flex w-full items-center rounded-lg px-3 py-2 text-sm text-white hover:bg-white/5" data-lang="EN">English</button>
+                            <button type="button" class="language-option flex w-full items-center rounded-lg px-3 py-2 text-sm text-muted hover:bg-white/5" data-lang="CZ">Čeština</button>
+                        </div>
                     </div>
                     <a href="/noctiumclient/dashboard.html" class="px-5 py-2 rounded-full text-sm font-semibold bg-primary text-black hover:bg-primary-light transition-all duration-200">Log in</a>
                 </div>
@@ -908,6 +912,41 @@ document.addEventListener("DOMContentLoaded", () => {
             answer.style.transition =
                 "height 0.3s ease, opacity 0.25s ease";
         });
+    });
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const switcher = document.getElementById("language-switcher");
+    const button = document.getElementById("language-button");
+    const menu = document.getElementById("language-menu");
+
+    if (!switcher || !button || !menu) return;
+
+    button.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        const open = !menu.classList.contains("hidden");
+        menu.classList.toggle("hidden", open);
+        button.setAttribute("aria-expanded", String(!open));
+    });
+
+    menu.querySelectorAll(".language-option").forEach(option => {
+        option.addEventListener("click", () => {
+            const lang = option.dataset.lang;
+            button.querySelector("span").textContent = lang;
+            menu.classList.add("hidden");
+            button.setAttribute("aria-expanded", "false");
+        });
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!switcher.contains(event.target)) {
+            menu.classList.add("hidden");
+            button.setAttribute("aria-expanded", "false");
+        }
     });
 });
 </script>
